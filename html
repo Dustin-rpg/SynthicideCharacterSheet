@@ -1,187 +1,323 @@
-<input class="sheet-tab1_toggle" name="attr_tab" type="hidden" value="1" />
-<input class="sheet-tab2_toggle" name="attr_tab" type="hidden" value="0" />
-<div>
-    <input type="radio" name="attr_tab" class="sheet-tab sheet-tab1_toggle" value="1" checked="checked"><span> Sheet</span>
-    <input type="radio" name="attr_tab" class="sheet-tab sheet-tab2_toggle" value="2"><span> Rollers</span></div>
-
-<div class="sheet-tab1 sheet-tab-content">
-<br/>
-<br/>
-<div class="sheet-inline"><table width=100% class="sheet-large"><tr><th></th><th><p>BASE</p></th><th><p>CURRENT</p></th></tr>
-<tr><td><h2>AWARENESS</h2></td><td>
-    <input type= "number" class= "sheet-att" name='attr_Awareness' value="0"></input></td>
-    <td><input type= "number" class= "sheet-att" name='attr_AwarenessC' value="0"></input></td></tr>
-<tr><td><h2>COMBAT</h2></td>
-<td><input type= "number" class= "sheet-att" name='attr_Combat' value="0"></td>
-<td><input type= "number" class= "sheet-att" name='attr_Combatc' value="0"></td></tr>
-<tr><td><h2>TOUGHNESS</h2></td>
-<td><input type= "number" class= "sheet-att" name='attr_Toughness' value="0"></td>
-<td><input type= "number" class= "sheet-att" name='attr_ToughnessC' value="0"></td></tr>
-<tr><td><h2>INFLUENCE</h2></td>
-<td><input type= "number" class= "sheet-att" name='attr_Influence' value="0"></td>
-<td><input type= "number" class= "sheet-att" name='attr_InfluenceC' value="0"></td></tr>
-<tr><td><h2>OPERATION</h2></td>
-<td><input type= "number" class= "sheet-att" name='attr_Operation' value="0"></td>
-<td><input type= "number" class= "sheet-att" name='attr_OperationC' value="0"></td></tr>
-<tr><td><h2>NERVE</h2></td>
-<td><input type= "number" class= "sheet-att" name='attr_Nerve' value="0"></td>
-<td><input type= "number" class= "sheet-att" name='attr_NerveC' value="0"></td></tr>
-<tr><td><h2>SPEED</h2></td>
-<td><input type= "number" class= "sheet-att" name='attr_Speed' value="0"></td>
-<td><input type= "number" class= "sheet-att" name='attr_SpeedC' value="0"></td></tr></table></div>
-<div class="sheet-inline2"><table width=100%><tr><td colspan="3"><p>CHARACTER NAME</p></td>
-<td><p>LEVEL</p></td></tr><tr>
-    <td colspan="3"><input type= "text" class="sheet-small" name='attr_character_name'></td>
-    <td><input type = "number" class="sheet-small"></td></tr>
-    <tr><td colspan="3"><p>BIOCLASS</p></td><td></td></tr>
-    <tr><td colspan="3"><input type= "text" class="sheet-small"></td><td></td></tr>
-    <tr><td colspan="2"><p>BODY TYPE</p></td>
-    <td colspan="2"><p>MIND TYPE</p></td></tr>
-    <tr><td colspan="2"><input type = "text" class="sheet-small"></td><td colspan="2"><input type = "text" class="sheet-small"></td></tr></table>
-    <br/></div>
-    
-    <div class="sheet-inline"><br/><br/><table width=75%><tr><td><p>MOTIVATION</p></td>
-<td><p>CYNICISM</p></td><td><p>RESOLVE</p></td></tr><tr>
-    <td><input type= "text" class="sheet-small"></td>
-    <td><input type = "number" class="sheet-small"></td> <td><input type = "number" class="sheet-small"></td></tr>
-</table><br/><br/></div>
-<br/><br/>
-    <div class="sheet-inline2"><table width=100%><tr>
-<td></td><td></td><td><p>TOUGHNESS</p></td><td></td><td><p>OTHER</p></td><td></td><td><p>TOUGHNESS DEFENSE</p></td></tr><tr>
-    <td></td><td></td><td><input type= "number" class="sheet-small" value="@{Toughness}" name="attr_Toughnesscalced1" disabled="true"></td><td><p>+ 5 +</p></td><td><input type = "number" class="sheet-small" value="0" name="attr_TDother"></td> <td><p>=</p></td><td><input type = "number" class="sheet-small" name="attr_TDcalc" value="@{Toughness}+@{TDother}+5" disabled="true"></td></tr>
-<td><p>TOUGHNESS</p></td><td></td><td><p>OTHER</p></td><td></td><td><p>ARMOR</p></td><td></td><td><p>ARMOR DEFENSE</p></td></tr><tr>
-    <td><input type = "number" class="sheet-small" value="@{Toughness}" name="attr_Toughnesscalced2" disabled="true"></td><td><p>+</p></td><td><input type= "number" class="sheet-small" name="attr_ADother" value="0"></td><td><p>+ 5 +</p></td><td><input type = "number" class="sheet-small" name="attr_Armor" value="0"></td> <td><p>=</p></td><td><input type = "number" class="sheet-small" name="attr_ADcalc" value="@{Toughness}+@{ADother}+@{Armor}+5" disabled="true"></td></tr>
-</table> 
-<table width=100%><tr><td><p>ARMOR</p></td><td><p>SPEED RATING</p></td></tr><tr><td><input class="sheet-small"></td><td><input type="number" class="sheet-small"></td></tr></table><br/>
+<!--LEFT HAND SIDE - ATTRIBUTES ROWS + AWARENESS & SPEED-->
+<div class="2column">
+    <div class="attributes">
+        <div class="top-labels">
+            <label>BASE</label>
+            <label>CURRENT</label>
+        </div>
+        <div>
+            <h2>AWARENESS</h2>
+            <input type="number" name='attr_awareness' value="0" />
+            <button type='roll' value='&{template:default} {{name=Awareness}} {{roll=[[1d10+@{awareness}]]}}' name='roll_Awareness'>k</button>
+            <input type="number" name='attr_awareness_current' value="0" />
+            <button type='roll' value='&{template:default} {{name=Awareness (Current)}} {{roll=[[1d10+@{awareness_current}]]}}' name='roll_awareness_current'>k</button>
+        </div>
+        <div>
+            <h2>COMBAT</h2>
+            <input type="number" name='attr_combat' value="0" />
+            <button type='roll' value='&{template:default} {{name=Combat}} {{roll=[[1d10+@{combat}]]}}' name='roll_Awareness'>k</button>
+            <input type="number" name='attr_combat_current' value="0" />
+            <button type='roll' value='&{template:default} {{name=Combat (Current)}} {{roll=[[1d10+@{combat_current}]]}}' name='roll_combat_current'>k</button>
+        </div>
+        <div>
+            <h2>TOUGHNESS</h2>
+            <input type="number" name='attr_toughness' value="0" />
+            <button type='roll' value='&{template:default} {{name=Toughness}} {{roll=[[1d10+@{toughness}]]}}' name='roll_Awareness'>k</button>
+            <input type="number" name='attr_toughness_current' value="0" />
+            <button type='roll' value='&{template:default} {{name=Toughness (Current)}} {{roll=[[1d10+@{toughness_current}]]}}' name='roll_toughness_current'>k</button>
+        </div>
+        <div>
+            <h2>INFLUENCE</h2>
+            <input type="number" name='attr_influence' value="0" />
+            <button type='roll' value='&{template:default} {{name=Influence}} {{roll=[[1d10+@{influence}]]}}' name='roll_Awareness'>k</button>
+            <input type="number" name='attr_influence_current' value="0" />
+            <button type='roll' value='&{template:default} {{name=Influence (Current)}} {{roll=[[1d10+@{influence_current}]]}}' name='roll_influence_current'>k</button>
+        </div>
+        <div>
+            <h2>OPERATION</h2>
+            <input type="number" name='attr_operation' value="0" />
+            <button type='roll' value='&{template:default} {{name=Operation}} {{roll=[[1d10+@{operation}]]}}' name='roll_Awareness'>k</button>
+            <input type="number" name='attr_operation_current' value="0" />
+            <button type='roll' value='&{template:default} {{name=Operation (Current)}} {{roll=[[1d10+@{operation_current}]]}}' name='roll_operation_current'>k</button>
+        </div>
+        <div>
+            <h2>NERVE</h2>
+            <input type="number" name='attr_nerve' value="0" />
+            <button type='roll' value='&{template:default} {{name=Nerve}} {{roll=[[1d10+@{nerve}]]}}' name='roll_Awareness'>k</button>
+            <input type="number" name='attr_nerve_current' value="0" />
+            <button type='roll' value='&{template:default} {{name=Nerve (Current)}} {{roll=[[1d10+@{nerve_current}]]}}' name='roll_nerve_current'>k</button>
+        </div>
+        <div>
+            <h2>SPEED</h2>
+            <input type="number" name='attr_speed' value="0" />
+            <button type='roll' value='&{template:default} {{name=Speed}} {{roll=[[1d10+@{speed}]]}}' name='roll_Awareness'>k</button>
+            <input type="number" name='attr_speed_current' value="0" />
+            <button type='roll' value='&{template:default} {{name=Speed (Current)}} {{roll=[[1d10+@{speed_current}]]}}' name='roll_speed_current'>k</button>
+        </div>
+    </div>
+    <div class="speed">
+        <div>
+            <label class="half-speed">1/2 SPEED</label>
+            <label>OTHER</label>
+            <label>ACTION POINTS</label>
+            <br />
+            <div class="small-box"><span name="attr_speed_half"></span></div>
+            <span>+3+</span>
+            <input type="number" name='attr_action_points_other' value="0" />
+            <span>=</span>
+            <div class="small-box"><span name="attr_action_points"></span></div>
+        </div>
+        <div>
+            <label>AWARENESS</label>
+            <label>SPEED</label>
+            <label>OTHER</label>
+            <label>BATTLE REFLEX</label>
+            <br />
+            <div class="small-box"><span name="attr_awareness"></span></div>
+            <span>+</span>
+            <div class="small-box"><span name="attr_speed"></span></div>
+            <span>+</span>
+            <input type="number" name='attr_battle_reflex_other' value="0" />
+            <span>=</span>
+            <input type="number" name='attr_battle_reflex' value="0" />
+            <button type='roll' value='&{template:default} {{name=Battle Reflex}} {{roll=[[1d10+@{battle_reflex}]]}}' name='roll_BattleReflex'>k</button>
+            <button type='roll' value='&{template:default} {{name=Battle Reflex (Current)}} {{roll=[[1d10+@{speed_current}+@{awareness_current}+@{battle_reflex_other}]]}}' name='roll_BattleReflex_current'>k</button>
+        </div>
+    </div>
+    <div class="hp">
+        <div>
+            <label>CURRENT HP</label>
+            <label>MAX HP</label>
+            <label>HP/LVL</label>
+            <label>UNSPENT TRAIT POINTS</label>
+            <br />
+            <input type="number" name='attr_hp' value="0" />
+            <input type="number" name='attr_hp_max' value="0" />
+            <input type="number" name='attr_hp_lvl' value="0" />
+            <input type="number" name='attr_trait_points' value="0" />
+        </div>
+    </div>
+    <div class="levelUp">
+        <h2>LEVEL UP TRACKER (TP GAINED)</h2>
+        <fieldset class="repeating_level">
+            <h3>Level</h3><input type="number" name="attr_lvl" title="@{lvl}"/>
+            <input type="checkbox" name="attr_lvl_1" title="@{lvl_1}" /><span></span>
+            <input type="checkbox" name="attr_lvl_2" title="@{lvl_2}" /><span></span>
+            <input type="checkbox" name="attr_lvl_3" title="@{lvl_3}" /><span></span>
+            <input type="checkbox" name="attr_lvl_4" title="@{lvl_4}" /><span></span>
+            <span>(+1 Attribute)</span>
+            <hr />
+        </fieldset>
+    </div>
+    <div class="aliases">
+        <label>ALIASES</label>
+        <textarea name="attr_aliases"></textarea>
+    </div>
+    <div class="psychic">
+        <label>PSYCHIC POWERS</label>
+        <label>OVERCHARGE</label>
+        <label>USES</label>
+        <fieldset class="repeating_powers">
+            <input type="text" name="attr_power" />
+            <input type="text" name="attr_overcharge" />
+            <input type="text" name="attr_uses" />
+        </fieldset>
+    </div>
+    <div class="backstory">
+        <label>CHARACTER BACKSTORY</label>
+        <textarea name="attr_character_backstory"></textarea>
+    </div>
 </div>
-<div class="sheet-inline"><br/><table width=100%><tr><td></td><td></td><td><p>NERVE</p></td><td></td><td><p>OTHER</p></td><td></td><td><p>NERVE DEFENSE</p></td></tr>
-<tr><td></td><td></td><td><input type= "number" class="sheet-small" value="@{Nerve}" name="attr_Nervecalced1" disabled="true"></td><td><p>+ 5 +</p></td><td><input type = "number" class="sheet-small" name="attr_NDother" value="0"></td> <td><p>=</p></td><td><input type = "number" class="sheet-small" name="attr_NDcalc" value="@{Nerve}+@{NDother}+5" disabled="true"></td></tr></table><br/><br/><br/></div>
-
-<div><br/><br/><br/><br/></div>
-
-<div class="sheet-inline"><table width=100%>
-    <tr><td></td><td></td><td><p>1/2 SPEED</p></td><td></td><td><p>OTHER</p></td><td></td><td><p>ACTION POINTS</p></td></tr>
-<tr><td></td><td></td><td><input type= "number" class="sheet-small" value="floor(@{Speed}/2)" name="attr_Speedcalced1" disabled="true"></td><td><p>+ 3 +</p></td><td><input type= "number" class="sheet-small" name="attr_APother" value="0"></td><td><p>=</p></td><td><input type = "number" class="sheet-small" name="attr_APcalc" value="@{Speedcalced1}+@{APother}+3" disabled="true"></td></tr>
-    <tr><td><p>AWARENESS</p></td><td></td><td><p>SPEED</p></td><td></td><td><p>OTHER</p></td><td></td><td><p>BATTLE REFLEX</p></td></tr>
-<tr><td><input type= "number" class="sheet-small" value="@{Awareness}" name="attr_Awarenesscalced1" disabled="true"></td><td><p>+</p></td><td><input type = "number" class="sheet-small" value="@{Speed}" name="attr_Speedcalced2" disabled="true"></td><td><p>+</p></td><td><input type= "number" class="sheet-small" name="attr_BRother" value="0"></td><td><p>=</p></td><td><input type = "number" class="sheet-small" name="attr_BRcalced" value="@{Speed}+@{Awareness}+@{BRother}" disabled="true"></td></tr></table>
-<br/>
-<table width=100%><tr><td><p>CURRENT HP</p></td>
-<td><p>Max HP</p></td><td><p>HP/LVL</p></td></tr><tr>
-    <td><input type= "text" class="sheet-small"></td>
-    <td><input type = "number" class="sheet-small"></td> <td><input type = "number" class="sheet-small"></td></tr>
-    <tr><td></td><td></td><td><p>UNSPENT TRAIT POINTS</p></td></tr><tr>    
-    <td></td><td></td><td><input type= "number" class="sheet-small"></td></tr>
-</table>
-<br/>
-<div class="sheet-inline3"><p>LEVEL UP TRACKER (TP GAINED)</p>
-<table width=100%>
-<tr><td><input type= "checkbox" class="traitp"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><p>Lvl 2 (+1 Attribute)</p></td></tr>
-<tr><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><p>Lvl 3 (+1 Attribute)</p></td></tr>
-<tr><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><p>Lvl 4 (+1 Attribute)</p></td></tr>
-<tr><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><p>Lvl 5 (+1 Attribute)</p></td></tr>
-<tr><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><p>Lvl 6 (+1 Attribute)</p></td></tr>
-<tr><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><p>Lvl 7 (+1 Attribute)</p></td></tr>
-<tr><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><p>Lvl 8 (+1 Attribute)</p></td></tr>
-<tr><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><p>Lvl 9 (+1 Attribute)</p></td></tr>
-<tr><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><p>Lvl 10 (+1 Attribute)</p></td></tr>
-<tr><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><input type= "checkbox"></td><td><p>Lvl 11 (+1 Attribute)</p></td></tr>
-    
-    </table></div>
-
+<!--RIGHT HAND SIDE - CHARACTER INFO & TOUGHNESS-->
+<div class="2column">
+    <div class="character">
+        <label>CHARACTER NAME</label><input type="text" name='attr_character_name' />
+        <label>LEVEL</label><input type="number" name='attr_level' />
+        <br />
+        <label>BIOCLASS</label>
+        <input type="text" name='attr_bioclass' />
+        <br />
+        <label>MIND TYPE</label>
+        <label>BODY TYPE</label>
+        <input type="text" name='attr_mind_type' />
+        <input type="text" name='attr_body_type' />
+    </div>
+    <div class="motivation">
+        <label>MOTIVATION</label>
+        <label>CYNICISM</label>
+        <label>RESOLVE</label>
+        <br />
+        <input type="text" name='attr_motivation' />
+        <input type="text" name='attr_cynicism' />
+        <input type="text" name='attr_resolve' />
+    </div>
+    <div class="toughness">
+        <div>
+            <label>TOUGHNESS</label>
+            <label>OTHER</label>
+            <label>TOUGHNESS DEFENSE</label>
+            <br />
+            <div class="small-box"><span name="attr_toughness"></span></div>
+            <span>+ 5 +</span>
+            <input type="number" name='attr_toughness_other' />
+            <span>=</span>
+            <div class="small-box"><span name="attr_toughness_defense"></span></div>
+        </div>
+        <div>
+            <label>TOUGHNESS</label>
+            <label>OTHER</label>
+            <label>ARMOR</label>
+            <label>ARMOR DEFENSE</label>
+            <div class="small-box"><span name="attr_toughness"></span></div>
+            <span>+</span>
+            <input type="number" name='attr_armor_defense_other' value="0" />
+            <span>+ 5 +</span>
+            <input type="number" name='attr_armor' value="0" />
+            <span>=</span>
+            <div class="small-box"><span name="attr_armor_defense"></span></div>
+        </div>
+    </div>
+    <div class="nerve">
+        <label>NERVE</label>
+        <label>OTHER</label>
+        <label>NERVE DEFENSE</label>
+        <br />
+        <input type="number" name='attr_nerve' />
+        <span>+ 5 +</span>
+        <input type="number" name='attr_nerve_other' />
+        <span>=</span>
+        <div class="small-box"><span name="attr_nerve_defense"></span></div>
+    </div>
+    <div class="weapons">
+        <label>WEAPON</label>
+        <fieldset class="repeating_weapons">
+            <label>NAME</label>
+            <label>ATT</label>
+            <label>DMG</label>
+            <label>ATTACK SPD</label>
+            <label>RANGE</label>
+            <br />
+            <input type="text" name="attr_weapon" />
+            <input type="number" name="attr_att" />
+            <input type="number" name="attr_dmg" />
+            <input type="text" name="attr_attack_spd" />
+            <input type="number" name="attr_range" />
+            <button type="roll" name="roll_weapon" value="&{template:default} {{name=@{weapon}}} {{roll=[[1d10+@{att}]]}} {{roll=[[1d10]]}} {{attack bonus=+@{att}}} {{damage bonus=+@{dmg}}}">k</button>
+            <br/>
+            <label>OTHER NOTES</label>
+            <input type="text" name="attr_other_notes" />
+        </fieldset>
+    </div>
+    <div class="weapon-classes">
+        <label>STRIKING</label>
+        <label>PISTOLS</label>
+        <label>RIFLES</label>
+        <label>SHOTGUNS</label>
+        <br />
+        <label>WEAPON CLASSES</label>
+        <input type="checkbox" name="attr_striking" title="@{striking}" /><span></span>
+        <input type="checkbox" name="attr_pistols" title="@{pistols}" /><span></span>
+        <input type="checkbox" name="attr_rifles" title="@{rifle}" /><span></span>
+        <input type="checkbox" name="attr_shotguns" title="@{shotguns}" /><span></span>
+    </div>
+    <div class="contact">
+        <label>CONTACT/FRIENDS</label>
+        <textarea name="attr_contact_friends"></textarea>
+    </div>
+    <div class="possession">
+        <label>POSESSIONS</label>
+        <textarea name="attr_posessions"></textarea>
+        <br />
+        <label>DAYS OF FOOD</label>
+        <input type="text" name='attr_food' />
+        <label>DAYS WITHOUT EATING</label>
+        <input type="text" name='attr_without_eating' />
+        <br/>
+        <span>EAT AT LEAST 1 MEAL A DAY OR SUFFER -2 TO ALL ROLLS, INCLUDING DMG. GOING MORE THAN 6 + TOUGHNESS DAYS WITHOUT FOOD MEANS YOU DIE. THE DAY COUNT DOES NOT RESET UNTIL YOU EAT FOOD 2 DAYS IN A ROW.</span>
+        <label>LURANS</label>
+        <input type="text" name='attr_lurans' />
+    </div>
+    <div class="notes">
+        <label>NOTES</label>
+        <textarea name="attr_notes"></textarea>
+    </div>
 </div>
 
-<div class="sheet-inline">
-<div class="sheet-inline3">
-<table width=100%><tr><td><p>WEAPON</p></td><td><p>ATT</p></td><td><p>DMG</p></td><td><p>ATTCK SPD</p></td><td><p>RANGE</p></td><td><p>OTHER NOTES</p></td></tr>
-<tr><td><input type="text" class="sheet-smaller" name="attr_Weapon1"></td><td><input type="number" class="sheet-smaller" name="attr_ATT1" value="0"></td><td><input type="number" class="sheet-smaller" name="attr_DMG1" value="0"></td><td><input type="text" class="sheet-smaller"></td>
-<td><input type="number" class="sheet-smaller" name="attr_R1" value="0"></td><td><input type="text" class="sheet-smaller"></tr>
-<tr><td><input type="text" class="sheet-smaller" name="attr_Weapon2"></td><td><input type="number" class="sheet-smaller" name="attr_ATT2" value="0"></td><td><input type="number" class="sheet-smaller" name="attr_DMG2" value="0"></td><td><input type="text" class="sheet-smaller"></td>
-<td><input type="number" class="sheet-smaller" name="attr_R2" value="0"></td><td><input type="text" class="sheet-smaller"></tr>
-<tr><td><input type="text" class="sheet-smaller" name="attr_Weapon3"></td><td><input type="number" class="sheet-smaller" name="attr_ATT3" value="0"></td><td><input type="number" class="sheet-smaller" name="attr_DMG3" value="0"></td><td><input type="text" class="sheet-smaller"></td>
-<td><input type="number" class="sheet-smaller" name="attr_R3" value="0"></td><td><input type="text" class="sheet-smaller"></tr>
-<tr><td><input type="text" class="sheet-smaller" name="attr_Weapon4"></td><td><input type="number" class="sheet-smaller" name="attr_ATT4" value="0"></td><td><input type="number" class="sheet-smaller" name="attr_DMG4" value="0"></td><td><input type="text" class="sheet-smaller"></td>
-<td><input type="number" class="sheet-smaller" name="attr_R4" value="0"></td><td><input type="text" class="sheet-smaller"></tr>
-</table>    
-<br/>    
-</div>
-<table width=100%><tr><td><p>WEAPON CLASSES</p></td><td><p>STRIKING</p><input type="checkbox"></td><td><p>PISTOLS</p><input type="checkbox"></td><td><p>RIFLES</p><input type="checkbox"></td><td><p>SHOTGUNS</p><input type="checkbox"></td></tr></table><br/>    
-<div class="sheet-inline3">
-    <table width=100%><tr><td><p>ASPECT</p></td><td><input type="text" class="sheet-long"></td></tr></table>
-    <br/><p>TRAITS</p>
-<textarea class="sheet-box"></textarea>
-<textarea class="sheet-box"></textarea>
-</div>
+<!-- HIDDEN ATTRIBUTES --> 
+<input type="hidden" name="attr_toughness_defense" value="5" />
+<input type="hidden" name="attr_nerve_defense" value="5" />
+<input type="hidden" name="attr_armor_defense" value="5" />
+<input type="hidden" name="attr_action_points" value="3" />
+<input type="hidden" name="attr_speed_half" value="0" />
+<input type="hidden" name="attr_battle_reflex" value="0" />
 
-</div>
+<!--Sheet Worker-->
+<script type="text/worker">
 
-<div class="sheet-inlinethird"><div class="sheet-inline3"><p>ALIASES</p><textarea class="sheet-content"></textarea></div></div>
-<div class="sheet-inlinesixty"><div class="sheet-inline3"><p>CONTACTS/FRIENDS</p><textarea class="sheet-content"></textarea></div></div>
+    //Action Points
+on("change:speed change:action_points_other", (eventinfo) => {
+    const value1 = parseInt(eventinfo.newValue) || 0;
+    let attr2 = (eventinfo.sourceAttribute === "speed") ? "action_points_other" : "speed";
 
-<div class="sheet-inlinethird"><div class="sheet-inline3"><table width=100%><tr><td><p>PSYCHIC POWERS</p></td><td><p>OVRCHRG.</p></td><td><p>USES</p></td></tr><tr><td><textarea class="sheet-psych"></textarea></td><td><textarea class="sheet-psych2"></textarea></td><td><textarea class="sheet-psych2"></textarea></td></tr></table></div></div>
-<div class="sheet-inlinesixty"><div class="sheet-inline3"><p>POSESSIONS</p><textarea class="sheet-gear"></textarea><br/>
+    //Get the second attribute for the calculation
+    getAttrs([`${attr2}`], (v) => {
+        let value2 = parseInt(v.attr2) || 0;
+        let update = {};
 
-<table width=100%><tr><td><p>DAYS OF FOOD</p></td><td><p>DAYS WITHOUT EATING</p></td></tr>
-<tr><td><input type="text" class="sheet-small"></td><td><input type="text" class="sheet-small"></td></tr></table>
-<p>EAT AT LEAST 1 MEAL A DAY OR SUFFER -2 TO ALL ROLLS, INCLUDING DMG. GOING MORE THAN 6 + TOUGHNESS DAYS WITHOUT FOOD MEANS YOU DIE. THE DAY COUNT DOES NOT RESET UNTIL YOU EAT FOOD 2 DAYS IN A ROW.</p>
-<br/>
-<p>LURANS</p>
-<input type="text" class="sheet-long">
-<br/>
-<br/>
-</div> </div>
-<div class="sheet-inlinethird"><div class="sheet-inline3"><p>CHARACTER BACKSTORY</p><textarea class="sheet-content"></textarea></div></div>
-<div class="sheet-inlinesixty"><div class="sheet-inline3"><p>NOTES</p><textarea class="sheet-content"></textarea></div></div>
-</div>
+        //Update Action Points
+        update["action_points"] = value1 + value2 + 3
 
-<!-- Adding a Roller sheet div -->
+        //Update half speed on speed change
+        if (eventinfo.sourceAttribute === "speed") {
+            update["speed_half"] = (eventinfo.sourceAttribute === "speed") ? Math.floor(attr/2) : Math.floor(attr2/2)
+        };
 
-<div class="sheet-tab-content sheet-tab2">
-<div class="sheet-inline"><table width=100% class="sheet-large"><tr><th></th><th><p>BASE</p></th><th><p>CURRENT</p></th></tr>
-<tr><td><h2>AWARENESS</h2></td><td>
-    <button type='roll' value='/roll 1d10 + @{Awareness}' name='roll_Awareness'></button></td>
-    <td> <button type='roll' value='/roll 1d10 + @{AwarenessC}' name='roll_AwarenessC'></td></tr>
-<tr><td><h2>COMBAT</h2></td>
-<td><button type='roll' value='/roll 1d10 + @{Combat}' name='roll_Combat'></button></td>
-<td><button type='roll' value='/roll 1d10 + @{CombatC}' name='roll_CombatC'></button></td></tr>
-<tr><td><h2>TOUGHNESS</h2></td>
-<td><button type='roll' value='/roll 1d10 + @{Toughness}' name='roll_Toughness'></button></td>
-<td><button type='roll' value='/roll 1d10 + @{ToughnessC}' name='roll_ToughnessC'></button></td></tr>
-<tr><td><h2>INFLUENCE</h2></td>
-<td><button type='roll' value='/roll 1d10 + @{Influence}' name='roll_Influence'></button></td>
-<td><button type='roll' value='/roll 1d10 + @{InfluenceC}' name='roll_InfluenceC'></button></td></tr>
-<tr><td><h2>OPERATION</h2></td>
-<td><button type='roll' value='/roll 1d10 + @{Operation}' name='roll_Operation'></button></td>
-<td><button type='roll' value='/roll 1d10 + @{OperationC}' name='roll_OperationC'></button></td></tr>
-<tr><td><h2>NERVE</h2></td>
-<td><button type='roll' value='/roll 1d10 + @{Nerve}' name='roll_Nerve'></button></td>
-<td><button type='roll' value='/roll 1d10 + @{NerveC}' name='roll_NerveC'></button></td></tr>
-<tr><td><h2>SPEED</h2></td>
-<td><button type='roll' value='/roll 1d10 + @{Speed}' name='roll_Speed'></button></td>
-<td><button type='roll' value='/roll 1d10 + @{SpeedC}' name='roll_SpeedC'></button></td></tr>
-<tr><td><br/></td><td><br/></td><td><br/></td></tr>
-<tr><td><h2>BATTLE REFLEX</h2></td>
-<td><button type='roll' value='/roll 1d10 + @{Speed} + @{Awareness}' name='roll_BattleReflex'></button></td>
-<td><button type='roll' value='/roll 1d10 + @{SpeedC} + @{AwarenessC}' name='roll_BattleReflexC'></button></td></tr>
-</table>
-<br/>
-<br/>
-<table width=100% class="sheet-large">
+        setAttrs(update);
+    });
+});
 
-</table>
-</div>
 
-<div class="sheet-inline"><table width=100% class="sheet-large"><tr><th><p>ATTACKS</p></th><th></th><th></th></tr>
-<tr><td><input type= "text" class="sheet-small" disabled="true" name="attr_Weapon1R" value='@{Weapon1}'></td><td>
-    <button type='roll' value='/roll 1d10 + @{ATT1}' name='roll_Weapon1'></button></td>
-    <td><span>DMG: + </span><input type= "number" class="sheet-small" disabled="true" name="attr_DMG1R" value='@{DMG1}'></tr>
-<tr><td><input type= "text" class="sheet-small" disabled="true" name="attr_Weapon2R" value='@{Weapon2}'></td><td>
-    <button type='roll' value='/roll 1d10 + @{ATT2}' name='roll_Weapon2'></button></td>
-    <td><span>DMG: + </span><input type= "number" class="sheet-small" disabled="true" name="attr_DMG2R" value='@{DMG2}'></tr>
-<tr><td><input type= "text" class="sheet-small" disabled="true" name="attr_Weapon3R" value='@{Weapon3}'></td><td>
-    <button type='roll' value='/roll 1d10 + @{ATT3}' name='roll_Weapon3'></button></td>
-    <td><span>DMG: + </span><input type= "number" class="sheet-small" disabled="true" name="attr_DMG3R" value='@{DMG3}'></tr>
-<tr><td><input type= "text" class="sheet-small" disabled="true" name="attr_Weapon4R" value='@{Weapon4}'></td><td>
-    <button type='roll' value='/roll 1d10 + @{ATT4}' name='roll_Weapon4'></button></td>
-    <td><span>DMG: + </span><input type= "number" class="sheet-small" disabled="true" name="attr_DMG4R" value='@{DMG4}'></tr>
-</tabe></div>
-</div>
+    //Calculate Battle Reflex
+on("change:speed change:awareness change:battle_reflex_other", (eventinfo) => {
+     getAttrs(["speed", "awareness", "battle_reflex_other"], (v) => {
+        const speed     = parseInt(v.speed) || 0;
+        const awareness = parseInt(v.awareness) || 0;
+        const other     = parseInt(v.battle_reflex_other) || 0;
+        setAttrs({
+            battle_reflex: speed + awareness + other
+        });
+    });   
+});
+
+
+//This will set the toughness & nerve defense
+[`toughness`, `nerve`].forEach(attribute => {
+   on(`change:${attribute} change:${attribute}_other`, (eventinfo) => {
+        const value1         = parseInt(eventinfo.newValue) || 0;
+        let attr2 = (eventinfo.sourceAttribute === `${attribute}`) ? `${attribute}_other` : `${attribute}`;
+
+        //Get the second attribute for the calculation
+        getAttrs([`${attr2}`], (v) => {
+            let value2 = parseInt(v[`${attr2}`]) || 0;
+            setAttrs({
+                [`${attribute}_defense`]: value1 + value2 + 5
+            });
+        });
+    });
+});
+
+
+    //Armor Defense
+on("change:toughness change:armor_defense_other change:armor", (eventinfo) => {
+    //Get the second attribute for the calculation
+   getAttrs(["toughness", "armor_defense_other", "armor"], (v) => {
+        const toughness = parseInt(v.toughness) || 0;
+        const defense   = parseInt(v.armor_defense_other) || 0;
+        const armor     = parseInt(v.armor) || 0;
+        setAttrs({
+            armor_defense: toughness + defense + armor + 5
+        });
+    }); 
+});
+
+</script>
